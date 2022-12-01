@@ -12,8 +12,8 @@ fn main() {
         .collect::<Vec<_>>();
     calories_by_elf.sort_by(|a, b| b.cmp(a));
 
-    let max_coleries = calories_by_elf.iter().max().unwrap();
-    println!("Part 1: {max_coleries}");
+    let max_calories = calories_by_elf.iter().max().unwrap();
+    println!("Part 1: {max_calories}");
 
     let top_three_elf_calories_sum = calories_by_elf.iter().take(3).sum::<u32>();
     println!("Part 2: {top_three_elf_calories_sum}");
