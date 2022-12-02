@@ -76,7 +76,6 @@ impl Action {
             (&Outcome::Win, &Self::Rock) => Self::Paper,
             (&Outcome::Win, &Self::Paper) => Self::Scissors,
             (&Outcome::Win, &Self::Scissors) => Self::Rock,
-
         }
     }
 
