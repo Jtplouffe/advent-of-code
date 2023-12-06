@@ -28,7 +28,7 @@ impl<'a> Almanac<'a> {
     }
 
     pub fn lowest_location_from_seed_ranges(&self) -> usize {
-        // There is definitively a better way to do this, ig. computing using ranges instead of individual value
+        // There is definitively a better way to do this, eg. computing using ranges instead of individual value
         // ... or I can just throw more cpu at it.
         self.seeds
             .par_chunks(2)
