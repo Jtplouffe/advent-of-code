@@ -34,18 +34,11 @@ impl<'a> Almanac<'a> {
             .par_chunks(2)
             .flat_map(|values| values[0]..values[0] + values[1])
             .map(|seed| {
-                let mut source_number = seed;
-                let mut destination_number = seed;
-
-                for category_converter in &self.category_converters {
-                    destination_number = category_converter
-                        .convert(source_number)
-                        .unwrap_or(source_number);
-
-                    source_number = destination_number;
-                }
-
-                destination_number
+                self.category_converters
+                    .iter()
+                    .fold(seed, |number, category_converter| {
+                        category_converter.convert(number).unwrap_or(number)
+                    })
             })
             .min()
             .unwrap()
