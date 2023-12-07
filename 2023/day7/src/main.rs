@@ -1,8 +1,8 @@
 use camel_cards::CamelCards;
 
-mod hand;
-mod card;
 mod camel_cards;
+mod card;
+mod hand;
 mod hand_type;
 
 fn main() {
