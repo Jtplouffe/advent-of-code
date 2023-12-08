@@ -1,7 +1,7 @@
 use crate::hand::Hand;
 
 pub struct CamelCards {
-    hands: Vec<Hand>,
+    pub hands: Vec<Hand>,
 }
 
 impl CamelCards {
