@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 #[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Card {
     Two,
@@ -13,6 +15,18 @@ pub enum Card {
     Queen,
     King,
     Ace,
+}
+
+impl Card {
+    pub fn cmp_with_jokers(&self, other: &Self) -> Ordering {
+        if self == &Self::Jack && other != &Self::Jack {
+            Ordering::Less
+        } else if other == &Self::Jack && self != &Self::Jack {
+            Ordering::Greater
+        } else {
+            self.cmp(other)
+        }
+    }
 }
 
 impl From<char> for Card {

@@ -13,4 +13,8 @@ fn main() {
 
     let total_winnings = camel_cards.total_winnings();
     println!("Part 1: {total_winnings}");
+
+    camel_cards.sort_hands_with_jokers();
+    let total_winnings_with_jokers = camel_cards.total_winnings();
+    println!("Part 2: {total_winnings_with_jokers}");
 }
