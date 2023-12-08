@@ -9,6 +9,10 @@ impl CamelCards {
         self.hands.sort();
     }
 
+    pub fn sort_hands_with_jokers(&mut self) {
+        self.hands.sort_by(|a, b| a.cmp_with_jokers(b));
+    }
+
     pub fn total_winnings(&self) -> usize {
         self.hands
             .iter()
