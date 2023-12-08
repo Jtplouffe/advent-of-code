@@ -19,7 +19,7 @@ impl Hand {
                 .iter()
                 .zip(other.cards.iter())
                 .find_map(
-                    |(card_left, card_right)| match card_left.cmp_with_jokers(&card_right) {
+                    |(card_left, card_right)| match card_left.cmp_with_jokers(card_right) {
                         Ordering::Equal => None,
                         ordering => Some(ordering),
                     },
@@ -32,7 +32,7 @@ impl Hand {
 
 impl From<&str> for Hand {
     fn from(value: &str) -> Self {
-        let (cards, bid) = value.split_once(" ").expect("expected white space");
+        let (cards, bid) = value.split_once(' ').expect("expected white space");
 
         let cards: Vec<_> = cards.chars().map(Card::from).collect();
         let hand_type = HandType::from_hand_cards(&cards);

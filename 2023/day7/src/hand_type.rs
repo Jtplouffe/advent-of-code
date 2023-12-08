@@ -41,17 +41,15 @@ impl HandType {
 
         let pairs_count = card_counts.iter().filter(|&&count| count == 2).count();
         if pairs_count == 2 {
-            return Self::TwoPair;
+            Self::TwoPair
         } else if pairs_count == 1 {
-            return Self::OnePair;
+            Self::OnePair
+        } else {
+            Self::HighCard
         }
-
-        return Self::HighCard;
     }
 
     pub fn from_hard_cards_with_jokers(cards: &[Card]) -> Self {
-        println!("{:?}", cards);
-
         let mut card_counts = HashMap::<&Card, isize>::new();
 
         for card in cards {
@@ -68,17 +66,17 @@ impl HandType {
             })
             .collect();
 
-        if card_counts.iter().any(|&c| c >= 5 - joker_count) {
-            println!("{:?}\n\n", Self::FiveOfAKind);
+        let max_card_count = card_counts.iter().max().unwrap_or(&0);
+
+        if max_card_count + joker_count >= 5 {
             return Self::FiveOfAKind;
         }
 
-        if card_counts.iter().any(|&c| c >= 4 - joker_count) {
-            println!("{:?}\n\n", Self::FourOfAKind);
+        if max_card_count + joker_count >= 4 {
             return Self::FourOfAKind;
         }
 
-        if card_counts.iter().any(|&c| c >= 3 - joker_count) {
+        if max_card_count + joker_count >= 3 {
             let index = card_counts.iter().enumerate().find_map(|(index, &count)| {
                 if count >= 3 {
                     Some(index)
@@ -100,24 +98,19 @@ impl HandType {
             }
 
             if card_counts.iter().any(|&c| c >= 2 - joker_count) {
-                println!("{:?}\n\n", Self::FullHouse);
                 return Self::FullHouse;
             } else {
-                println!("{:?}\n\n", Self::ThreeOfAKind);
                 return Self::ThreeOfAKind;
             }
         }
 
         let pairs_count = card_counts.iter().filter(|&&count| count == 2).count() as isize;
         if pairs_count >= 2 - joker_count {
-            println!("{:?}\n\n", Self::TwoPair);
-            return Self::TwoPair;
+            Self::TwoPair
         } else if pairs_count >= 1 - joker_count {
-            println!("{:?}\n\n", Self::OnePair);
-            return Self::OnePair;
+            Self::OnePair
+        } else {
+            Self::HighCard
         }
-
-        println!("{:?}\n\n", Self::HighCard);
-        return Self::HighCard;
     }
 }
